@@ -69,7 +69,7 @@
 	        toggleCard: function toggleCard(card, index) {
 	            $('.card').removeClass('moving');
 	            this.movingCardIndex = index;
-	            $(card).addClass('moving');
+	            $(card).closest('.card').addClass('moving');
 	        },
 	        dropCard: function dropCard(slot) {
 	            if (null == this.movingCardIndex) return;

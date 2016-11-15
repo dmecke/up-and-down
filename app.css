@@ -1,6 +1,12 @@
+@font-face {
+    font-family: 'Kalam';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Kalam-Regular'), url(font/Kalam-Regular.ttf) format('truetype');
+}
 body {
-    background: rgba(131, 194, 190, 0.56);
-    font-family: Georgia, Times New Roman, serif;
+    background: rgb(178, 208, 204);
+    font-family: Kalam, Georgia, Times New Roman, serif;
     font-size: 2.5vw;
 }
 .score {
@@ -58,15 +64,15 @@ body {
 }
 .slot-container {
     border: 1px solid #999;
-    box-shadow: inset 2px 2px 5px 0 #000;
-    border-radius: 0.5vw;
+    box-shadow: inset 4px 4px 8px 0 #3a4644;
+    border-radius: 5vw;
     flex-grow: 1;
     margin: 5px;
 }
 .slot-container .headline {
     text-align: center;
-    font-size: 10vw;
-    line-height: 0.8;
+    font-size: 7vw;
+    margin-bottom: -2vw;
 }
 .slot-container .slot {
     width: calc(100% - 12px);
