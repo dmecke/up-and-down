@@ -38,12 +38,8 @@
             <div class="slot" v-for="(card, index) in game.hand.cards">
                 <div class="card" @mousedown="toggleCard($event.target, index)" :key="index">{{ card.value }}</div>
             </div>
-        </div>
-
-        <h2>Stack</h2>
-        <div class="stack">
             <div class="slot">
-                <div class="card" v-for="card in game.stack.cards">{{ card.value }}</div>
+                <div class="card" v-for="card in game.stack.cards"></div>
             </div>
         </div>
     </div>

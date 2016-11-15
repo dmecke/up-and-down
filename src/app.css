@@ -25,9 +25,13 @@
     width: calc(25% - 12px);
     padding-bottom: calc(37.5% - 18px);
     position: relative;
+    margin: 5px;
 }
 .slot h3 {
     text-align: center;
+}
+.hand .slot {
+    border: none;
 }
 .slot .card {
     position: absolute;
