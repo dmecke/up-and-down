@@ -10,4 +10,5 @@
     <description>Try to drop all your cards.</description>
     <author href="http://www.cunningsoft.de" email="daniel.mecke@cunningsoft.de">Daniel Mecke</author>
     <preference name="permissions" value="none" />
+    <preference name="orientation" value="portrait" />
 </widget>
