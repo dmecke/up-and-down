@@ -68,7 +68,7 @@ hr {
     font-size: 2vw;
 }
 .card.moving {
-    transform: scale(1.1, 1.1) !important;
+    transform: scale(1.2, 1.2) !important;
     box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.9);
 }
 .slot {
