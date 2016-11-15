@@ -10,30 +10,34 @@
 </head>
 <body>
     <div id="game">
-        <div>Score: {{ game.score() }}</div>
+        <div>Score: <span v-text="game.score()"></span></div>
 
         <div class="slots">
             <div class="slot" @mousedown="dropCard(0)">
                 <div class="headline">1 => 99 UP</div>
-                <div class="card" v-for="(card, index) in game.slot(0).cards">{{ card.value }}</div>
+                <div class="card" v-for="(card, index) in game.slot(0).cards" v-text="card.value"></div>
             </div>
             <div class="slot" @mousedown="dropCard(1)">
                 <div class="headline">1 => 99 UP</div>
-                <div class="card" v-for="(card, index) in game.slot(1).cards">{{ card.value }}</div>
+                <div class="card" v-for="(card, index) in game.slot(1).cards" v-text="card.value"></div>
             </div>
             <div class="slot" @mousedown="dropCard(2)">
                 <div class="headline">100 => 2 DOWN</div>
-                <div class="card" v-for="(card, index) in game.slot(2).cards">{{ card.value }}</div>
+                <div class="card" v-for="(card, index) in game.slot(2).cards" v-text="card.value"></div>
             </div>
             <div class="slot" @mousedown="dropCard(3)">
                 <div class="headline">100 => 2 DOWN</div>
-                <div class="card" v-for="(card, index) in game.slot(3).cards">{{ card.value }}</div>
+                <div class="card" v-for="(card, index) in game.slot(3).cards" v-text="card.value"></div>
             </div>
         </div>
 
         <div class="hand">
             <div class="slot" v-for="(card, index) in game.hand.cards">
-                <div class="card" @mousedown="toggleCard($event.target, index)" :key="index">{{ card.value }}</div>
+                <div class="card" @mousedown="toggleCard($event.target, index)" :key="index">
+                    <div class="top-left" v-text="card.value"></div>
+                    <div class="center" v-text="card.value"></div>
+                    <div class="bottom-right" v-text="card.value"></div>
+                </div>
             </div>
             <div class="slot">
                 <div class="card" v-for="card in game.stack.cards"></div>
