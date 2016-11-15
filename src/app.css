@@ -1,0 +1,43 @@
+.hand, .slots {
+    display: flex;
+}
+.card {
+    width: 100px;
+    height: 150px;
+    border: 1px solid #999;
+    margin: 5px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 42px;
+    background: white;
+}
+.card.moving {
+    border-color: #933;
+}
+.slot {
+    border: 1px solid #999;
+    width: 150px;
+    height: 225px;
+    position: relative;
+}
+.slot h3 {
+    text-align: center;
+}
+.slot .card {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+}
+.stack {
+    position: relative;
+    border: 1px solid #999;
+    width: 150px;
+    height: 225px;
+}
+.stack .card {
+    position: absolute;
+    top: 32px;
+    left: 16px;
+}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Up & Down</title>
+    <link href="src/app.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="game">
+        <h1>Up & Down</h1>
+        <div>Score: {{ game.score() }}</div>
+
+        <h2>Slots</h2>
+        <div class="slots">
+            <div class="slot" @mousedown="dropCard(0)">
+                <h3>1 => 99 UP</h3>
+                <div class="card" v-for="(card, index) in game.slot(0).cards">{{ card.value }}</div>
+            </div>
+            <div class="slot" @mousedown="dropCard(1)">
+                <h3>1 => 99 UP</h3>
+                <div class="card" v-for="(card, index) in game.slot(1).cards">{{ card.value }}</div>
+            </div>
+            <div class="slot" @mousedown="dropCard(2)">
+                <h3>100 => 2 DOWN</h3>
+                <div class="card" v-for="(card, index) in game.slot(2).cards">{{ card.value }}</div>
+            </div>
+            <div class="slot" @mousedown="dropCard(3)">
+                <h3>100 => 2 DOWN</h3>
+                <div class="card" v-for="(card, index) in game.slot(3).cards">{{ card.value }}</div>
+            </div>
+        </div>
+
+        <h2>Hand</h2>
+        <div class="hand">
+            <div class="card" v-for="(card, index) in game.hand.cards" :key="index" @mousedown="toggleCard($event.target, index)">{{ card.value }}</div>
+        </div>
+
+        <h2>Stack</h2>
+        <div class="stack">
+            <div class="card" v-for="card in game.stack.cards">{{ card.value }}</div>
+        </div>
+    </div>
+    <script type="text/javascript" src="app.js"></script>
+</body>
+</html>
