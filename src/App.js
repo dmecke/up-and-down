@@ -25,14 +25,13 @@ new Vue({
             if (this.game.slot(slot).isValid(this.game.hand.cards[this.movingCard])) {
                 this.game.slot(slot).drop(this.game.hand.cards[this.movingCard]);
                 this.game.hand.cards.splice(this.movingCard, 1);
+                this.game.slot(slot).lastCard().rerotate();
                 this.movingCard = null;
                 $('.card').removeClass('moving');
-                this.game.hand.take(this.game.stack.draw(1));
+                var newCards = this.game.stack.draw(1);
+                newCards[0].rerotate();
+                this.game.hand.take(newCards);
             }
         }
     }
-});
-
-$.each($('.card'), function() {
-    $(this).css('transform', 'rotate(' + (Math.random() * 6 - 3) + 'deg)');
 });

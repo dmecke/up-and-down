@@ -58,6 +58,8 @@ body {
 }
 .hand .slot {
     border: none;
+}
+.hand .slot .card {
     cursor: pointer;
 }
 .slot .card {

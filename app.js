@@ -77,16 +77,15 @@
 	            if (this.game.slot(slot).isValid(this.game.hand.cards[this.movingCard])) {
 	                this.game.slot(slot).drop(this.game.hand.cards[this.movingCard]);
 	                this.game.hand.cards.splice(this.movingCard, 1);
+	                this.game.slot(slot).lastCard().rerotate();
 	                this.movingCard = null;
 	                $('.card').removeClass('moving');
-	                this.game.hand.take(this.game.stack.draw(1));
+	                var newCards = this.game.stack.draw(1);
+	                newCards[0].rerotate();
+	                this.game.hand.take(newCards);
 	            }
 	        }
 	    }
-	});
-	
-	$.each($('.card'), function () {
-	    $(this).css('transform', 'rotate(' + (Math.random() * 6 - 3) + 'deg)');
 	});
 
 /***/ },
@@ -220,6 +219,9 @@
 	        }
 	        return false;
 	    };
+	    Slot.prototype.lastCard = function () {
+	        return this.cards[this.cards.length - 1];
+	    };
 	    return Slot;
 	}());
 	exports.__esModule = true;
@@ -304,7 +306,11 @@
 	var Card = (function () {
 	    function Card(value) {
 	        this.value = value;
+	        this.rerotate();
 	    }
+	    Card.prototype.rerotate = function () {
+	        this.rotation = Math.random() * 6 - 3;
+	    };
 	    return Card;
 	}());
 	exports.__esModule = true;

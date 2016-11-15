@@ -21,6 +21,11 @@ abstract class Slot
         return false;
     }
 
+    public lastCard(): Card
+    {
+        return this.cards[this.cards.length - 1];
+    }
+
     public abstract isValid(card: Card);
 }
 
