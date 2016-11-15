@@ -13,15 +13,34 @@ body {
     box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.3);
     margin: 5px;
     border-radius: 5.3%;
-    background: white;
     position: relative;
     left: 0;
     top: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 10vw;
     transition: all 0.5s ease;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,f7f7f7+100 */
+    background: #ffffff; /* Old browsers */
+    background: -moz-linear-gradient(top,  #ffffff 0%, #f7f7f7 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top,  #ffffff 0%,#f7f7f7 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom,  #ffffff 0%,#f7f7f7 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f7f7f7',GradientType=0 ); /* IE6-9 */
+}
+.card .center {
+    font-size: 10vw;
+}
+.card .top-left {
+    position: absolute;
+    left: 5%;
+    top: 3%;
+    font-size: 2vw;
+}
+.card .bottom-right {
+    position: absolute;
+    right: 5%;
+    bottom: 3%;
+    font-size: 2vw;
 }
 .card.moving {
     transform: scale(1.05, 1.05) !important;
