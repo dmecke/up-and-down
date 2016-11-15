@@ -20,7 +20,7 @@ hr {
     margin: 5vw 3vw;
     border: 0;
     border-top: 0.2vw solid rgba(0, 0, 0, 0.5);
-    border-bottom: 0.2vw solid rgba(255, 255, 255, 0.5);
+    border-bottom: 0.2vw solid rgba(255, 255, 255, 0.3);
 }
 .score {
     text-align: center;
@@ -68,7 +68,7 @@ hr {
     font-size: 2vw;
 }
 .card.moving {
-    transform: scale(1.05, 1.05) !important;
+    transform: scale(1.1, 1.1) !important;
     box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.9);
 }
 .slot {
@@ -88,10 +88,10 @@ hr {
     width: 8vw;
 }
 .slot-container .slot {
-    width: calc(100% - 10px - 1vw);
+    width: calc(100% - 10px);
     padding-bottom: calc(150% - 18px);
     border-radius: 5vw;
-    border: 0.5vw solid rgba(0, 0, 0, 0.5);
+    border: 0.2vw solid rgba(255, 255, 255, 0.3);
 }
 .hand .slot .card {
     cursor: pointer;
