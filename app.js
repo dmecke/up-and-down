@@ -63,26 +63,24 @@
 	    el: '#game',
 	    data: {
 	        game: game,
-	        movingCard: null
+	        movingCardIndex: null
 	    },
 	    methods: {
 	        toggleCard: function toggleCard(card, index) {
 	            $('.card').removeClass('moving');
-	            this.movingCard = index;
+	            this.movingCardIndex = index;
 	            $(card).addClass('moving');
 	        },
 	        dropCard: function dropCard(slot) {
-	            if (null == this.movingCard) return;
+	            if (null == this.movingCardIndex) return;
 	
-	            if (this.game.slot(slot).isValid(this.game.hand.cards[this.movingCard])) {
-	                this.game.slot(slot).drop(this.game.hand.cards[this.movingCard]);
-	                this.game.hand.cards.splice(this.movingCard, 1);
-	                this.game.slot(slot).lastCard().rerotate();
-	                this.movingCard = null;
+	            var handIndex = this.movingCardIndex;
+	            var card = this.game.hand.cards[handIndex];
+	
+	            if (this.game.slot(slot).isValid(card)) {
+	                this.game.dropCard(handIndex, slot, card);
 	                $('.card').removeClass('moving');
-	                var newCards = this.game.stack.draw(1);
-	                newCards[0].rerotate();
-	                this.game.hand.take(newCards);
+	                this.movingCardIndex = null;
 	            }
 	        }
 	    }
@@ -109,6 +107,14 @@
 	    }
 	    Game.prototype.score = function () {
 	        return this.stack.numberOfCards() + this.hand.numberOfCards();
+	    };
+	    Game.prototype.dropCard = function (handIndex, slot, card) {
+	        this.slot(slot).drop(card);
+	        this.hand.cards.splice(handIndex, 1);
+	        this.slot(slot).lastCard().rerotate();
+	        var newCards = this.stack.draw(1);
+	        newCards[0].rerotate();
+	        this.hand.take(newCards);
 	    };
 	    Game.prototype.isGameOver = function () {
 	        if (this.slotOneUp.canBeServedBy(this.hand)) {

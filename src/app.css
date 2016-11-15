@@ -3,6 +3,10 @@ body {
     font-family: Georgia, Times New Roman, serif;
     font-size: 2.5vw;
 }
+.score {
+    text-align: center;
+    font-size: 10vw;
+}
 .hand, .slots {
     display: flex;
     flex-wrap: wrap;
@@ -10,7 +14,7 @@ body {
 .card {
     width: 80%;
     height: 80%;
-    box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.3);
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
     margin: 5px;
     border-radius: 5.3%;
     position: relative;
@@ -47,17 +51,26 @@ body {
     box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.9);
 }
 .slot {
-    border: 1px solid #999;
     width: calc(25% - 12px);
     padding-bottom: calc(37.5% - 18px);
     position: relative;
     margin: 5px;
 }
-.slot .headline {
-    text-align: center;
+.slot-container {
+    border: 1px solid #999;
+    box-shadow: inset 2px 2px 5px 0 #000;
+    border-radius: 0.5vw;
+    flex-grow: 1;
+    margin: 5px;
 }
-.hand .slot {
-    border: none;
+.slot-container .headline {
+    text-align: center;
+    font-size: 10vw;
+    line-height: 0.8;
+}
+.slot-container .slot {
+    width: calc(100% - 12px);
+    padding-bottom: calc(150% - 18px);
 }
 .hand .slot .card {
     cursor: pointer;

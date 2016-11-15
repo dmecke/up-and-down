@@ -1,3 +1,4 @@
+import Card from "./Card";
 import Hand from "./Hand";
 import Slot from "./Slot";
 import SlotUp from "./SlotUp";
@@ -21,6 +22,16 @@ class Game
     public score(): number
     {
         return this.stack.numberOfCards() + this.hand.numberOfCards();
+    }
+
+    public dropCard(handIndex: number, slot: number, card: Card): void
+    {
+        this.slot(slot).drop(card);
+        this.hand.cards.splice(handIndex, 1);
+        this.slot(slot).lastCard().rerotate();
+        var newCards = this.stack.draw(1);
+        newCards[0].rerotate();
+        this.hand.take(newCards);
     }
 
     public isGameOver(): boolean

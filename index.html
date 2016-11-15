@@ -10,39 +10,46 @@
 </head>
 <body>
     <div id="game">
-        <div>Score: <span v-text="game.score()"></span></div>
-
+        <h2 class="score"><span v-text="game.score()"></span> cards left</h2>
         <div class="slots">
-            <div class="slot slot_0" @mousedown="dropCard(0)">
-                <div class="headline">1 => 99 UP</div>
-                <div class="card" v-for="(card, index) in game.slot(0).cards" v-bind:style="{ transform: 'rotate(' + card.rotation + 'deg)' }">
-                    <div class="top-left" v-text="card.value"></div>
-                    <div class="center" v-text="card.value"></div>
-                    <div class="bottom-right" v-text="card.value"></div>
+            <div class="slot-container">
+                <div class="headline">&blacktriangle;&blacktriangle;</div>
+                <div class="slot slot_0" @mousedown="dropCard(0)">
+                    <div class="card" v-for="(card, index) in game.slot(0).cards" v-bind:style="{ transform: 'rotate(' + card.rotation + 'deg)' }">
+                        <div class="top-left" v-text="card.value"></div>
+                        <div class="center" v-text="card.value"></div>
+                        <div class="bottom-right" v-text="card.value"></div>
+                    </div>
                 </div>
             </div>
-            <div class="slot slot_1" @mousedown="dropCard(1)">
-                <div class="headline">1 => 99 UP</div>
-                <div class="card" v-for="(card, index) in game.slot(1).cards" v-bind:style="{ transform: 'rotate(' + card.rotation + 'deg)' }">
-                    <div class="top-left" v-text="card.value"></div>
-                    <div class="center" v-text="card.value"></div>
-                    <div class="bottom-right" v-text="card.value"></div>
+            <div class="slot-container">
+                <div class="headline">&blacktriangle;&blacktriangle;</div>
+                <div class="slot slot_1" @mousedown="dropCard(1)">
+                    <div class="card" v-for="(card, index) in game.slot(1).cards" v-bind:style="{ transform: 'rotate(' + card.rotation + 'deg)' }">
+                        <div class="top-left" v-text="card.value"></div>
+                        <div class="center" v-text="card.value"></div>
+                        <div class="bottom-right" v-text="card.value"></div>
+                    </div>
                 </div>
             </div>
-            <div class="slot slot_2" @mousedown="dropCard(2)">
-                <div class="headline">100 => 2 DOWN</div>
-                <div class="card" v-for="(card, index) in game.slot(2).cards" v-bind:style="{ transform: 'rotate(' + card.rotation + 'deg)' }">
-                    <div class="top-left" v-text="card.value"></div>
-                    <div class="center" v-text="card.value"></div>
-                    <div class="bottom-right" v-text="card.value"></div>
+            <div class="slot-container">
+                <div class="headline">&blacktriangledown;&blacktriangledown;</div>
+                <div class="slot slot_2" @mousedown="dropCard(2)">
+                    <div class="card" v-for="(card, index) in game.slot(2).cards" v-bind:style="{ transform: 'rotate(' + card.rotation + 'deg)' }">
+                        <div class="top-left" v-text="card.value"></div>
+                        <div class="center" v-text="card.value"></div>
+                        <div class="bottom-right" v-text="card.value"></div>
+                    </div>
                 </div>
             </div>
-            <div class="slot slot_3" @mousedown="dropCard(3)">
-                <div class="headline">100 => 2 DOWN</div>
-                <div class="card" v-for="(card, index) in game.slot(3).cards" v-bind:style="{ transform: 'rotate(' + card.rotation + 'deg)' }">
-                    <div class="top-left" v-text="card.value"></div>
-                    <div class="center" v-text="card.value"></div>
-                    <div class="bottom-right" v-text="card.value"></div>
+            <div class="slot-container">
+                <div class="headline">&blacktriangledown;&blacktriangledown;</div>
+                <div class="slot slot_3" @mousedown="dropCard(3)">
+                    <div class="card" v-for="(card, index) in game.slot(3).cards" v-bind:style="{ transform: 'rotate(' + card.rotation + 'deg)' }">
+                        <div class="top-left" v-text="card.value"></div>
+                        <div class="center" v-text="card.value"></div>
+                        <div class="bottom-right" v-text="card.value"></div>
+                    </div>
                 </div>
             </div>
         </div>
