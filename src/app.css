@@ -1,3 +1,8 @@
+body {
+    background: rgba(131, 194, 190, 0.56);
+    font-family: Georgia, Times New Roman, serif;
+    font-size: 2.5vw;
+}
 .hand, .slots {
     display: flex;
     flex-wrap: wrap;
@@ -5,9 +10,9 @@
 .card {
     width: 80%;
     height: 80%;
-    border: 1px solid #999;
+    box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.3);
     margin: 5px;
-    border-radius: 10px;
+    border-radius: 5.3%;
     background: white;
     position: relative;
     left: 0;
@@ -15,10 +20,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 42px;
+    font-size: 10vw;
+    transition: all 0.5s ease;
 }
 .card.moving {
-    border-color: #933;
+    transform: scale(1.05, 1.05) !important;
+    box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.9);
 }
 .slot {
     border: 1px solid #999;
@@ -27,11 +34,12 @@
     position: relative;
     margin: 5px;
 }
-.slot h3 {
+.slot .headline {
     text-align: center;
 }
 .hand .slot {
     border: none;
+    cursor: pointer;
 }
 .slot .card {
     position: absolute;
