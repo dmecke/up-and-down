@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<widget xmlns   = "http://www.w3.org/ns/widgets"
+        xmlns:gap   = "http://phonegap.com/ns/1.0"
+        id          = "com.cunningsoft.up-and-down"
+        version     = "0.0.1"
+        versionCode = "1"
+>
+
+    <name>Up &amp; Down</name>
+    <description>Try to drop all your cards.</description>
+    <author href="http://www.cunningsoft.de" email="daniel.mecke@cunningsoft.de">Daniel Mecke</author>
+    <preference name="permissions" value="none" />
+</widget>
