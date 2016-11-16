@@ -123,6 +123,9 @@ hr {
 }
 .back {
     transform: rotateY(180deg);
+    background-size: cover;
+    background-image: url(img/card.png);
+    background-position: center;
 }
 .flipper {
     transition: 1s;
