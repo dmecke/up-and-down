@@ -27,11 +27,11 @@ class Game
     public dropCard(handIndex: number, slot: number, card: Card): void
     {
         this.slot(slot).drop(card);
-        this.hand.cards.splice(handIndex, 1);
+        // this.hand.cards.splice(handIndex, 1);
         this.slot(slot).lastCard().rerotate();
-        var newCards = this.stack.draw(1);
-        newCards[0].rerotate();
-        this.hand.take(newCards);
+        var newCard = this.stack.drawOne();
+        newCard.rerotate();
+        this.hand.takeOne(newCard, handIndex);
     }
 
     public isGameOver(): boolean

@@ -12,6 +12,11 @@ class Hand
         }
     }
 
+    public takeOne(card: Card, index: number)
+    {
+        this.cards[index] = card;
+    }
+
     public numberOfCards(): number
     {
         return this.cards.length;

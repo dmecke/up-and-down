@@ -23,6 +23,11 @@ class Stack
         return cards;
     }
 
+    public drawOne(): Card
+    {
+        return this.draw(1)[0];
+    }
+
     public numberOfCards(): number
     {
         return this.cards.length;

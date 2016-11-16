@@ -34,42 +34,35 @@ hr {
 .card {
     width: 80%;
     height: 80%;
-    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
     color: #333;
     margin: 5px;
-    border-radius: 5.3%;
     position: relative;
     left: 0;
     top: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.5s ease;
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,f7f7f7+100 */
-    background: #ffffff; /* Old browsers */
-    background: -moz-linear-gradient(top,  #ffffff 0%, #f7f7f7 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(top,  #ffffff 0%,#f7f7f7 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to bottom,  #ffffff 0%,#f7f7f7 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f7f7f7',GradientType=0 ); /* IE6-9 */
+    perspective: 1000px;
 }
-.card .center {
+.card .front .center {
     font-size: 10vw;
 }
-.card .top-left {
+.card .front .top-left {
     position: absolute;
     left: 5%;
     top: 3%;
     font-size: 2vw;
 }
-.card .bottom-right {
+.card .front .bottom-right {
     position: absolute;
     right: 5%;
     bottom: 3%;
     font-size: 2vw;
 }
-.card.moving {
+.card.moving .front,
+.card.moving .back {
     transform: scale(1.2, 1.2) !important;
     box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.9);
+}
+.card.moving .back {
+    display: none;
 }
 .slot {
     width: calc(25% - 12px);
@@ -100,4 +93,44 @@ hr {
     position: absolute;
     top: 10%;
     left: 10%;
+}
+.stack .card .flipper {
+    transform: rotateY(180deg);
+}
+.front, .back {
+    transition: all 0.5s ease;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+    border-radius: 5.3%;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,f7f7f7+100 */
+    background: #ffffff; /* Old browsers */
+    background: -moz-linear-gradient(top,  #ffffff 0%, #f7f7f7 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top,  #ffffff 0%,#f7f7f7 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom,  #ffffff 0%,#f7f7f7 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f7f7f7',GradientType=0 ); /* IE6-9 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.front {
+    z-index: 2;
+    transform: rotateY(0deg);
+}
+.back {
+    transform: rotateY(180deg);
+}
+.flipper {
+    transition: 1s;
+    transform-style: preserve-3d;
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+.card-switch-enter .flipper {
+    transform: rotateY(180deg);
 }

@@ -16,9 +16,14 @@
                 <div class="direction"><img src="img/up.png" alt="UP" /></div>
                 <div class="slot slot_0" @mousedown="dropCard(0)">
                     <div class="card" v-for="(card, index) in game.slot(0).cards" v-bind:style="{ transform: 'rotate(' + card.rotation + 'deg)' }">
-                        <div class="top-left" v-text="card.value"></div>
-                        <div class="center" v-text="card.value"></div>
-                        <div class="bottom-right" v-text="card.value"></div>
+                        <div class="flipper">
+                            <div class="front">
+                                <div class="top-left" v-text="card.value"></div>
+                                <div class="center" v-text="card.value"></div>
+                                <div class="bottom-right" v-text="card.value"></div>
+                            </div>
+                            <div class="back">back</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -26,9 +31,14 @@
                 <div class="direction"><img src="img/up.png" alt="UP" /></div>
                 <div class="slot slot_1" @mousedown="dropCard(1)">
                     <div class="card" v-for="(card, index) in game.slot(1).cards" v-bind:style="{ transform: 'rotate(' + card.rotation + 'deg)' }">
-                        <div class="top-left" v-text="card.value"></div>
-                        <div class="center" v-text="card.value"></div>
-                        <div class="bottom-right" v-text="card.value"></div>
+                        <div class="flipper">
+                            <div class="front">
+                                <div class="top-left" v-text="card.value"></div>
+                                <div class="center" v-text="card.value"></div>
+                                <div class="bottom-right" v-text="card.value"></div>
+                            </div>
+                            <div class="back">back</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -36,9 +46,14 @@
                 <div class="direction"><img src="img/down.png" alt="UP" /></div>
                 <div class="slot slot_2" @mousedown="dropCard(2)">
                     <div class="card" v-for="(card, index) in game.slot(2).cards" v-bind:style="{ transform: 'rotate(' + card.rotation + 'deg)' }">
-                        <div class="top-left" v-text="card.value"></div>
-                        <div class="center" v-text="card.value"></div>
-                        <div class="bottom-right" v-text="card.value"></div>
+                        <div class="flipper">
+                            <div class="front">
+                                <div class="top-left" v-text="card.value"></div>
+                                <div class="center" v-text="card.value"></div>
+                                <div class="bottom-right" v-text="card.value"></div>
+                            </div>
+                            <div class="back">back</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -46,9 +61,14 @@
                 <div class="direction"><img src="img/down.png" alt="UP" /></div>
                 <div class="slot slot_3" @mousedown="dropCard(3)">
                     <div class="card" v-for="(card, index) in game.slot(3).cards" v-bind:style="{ transform: 'rotate(' + card.rotation + 'deg)' }">
-                        <div class="top-left" v-text="card.value"></div>
-                        <div class="center" v-text="card.value"></div>
-                        <div class="bottom-right" v-text="card.value"></div>
+                        <div class="flipper">
+                            <div class="front">
+                                <div class="top-left" v-text="card.value"></div>
+                                <div class="center" v-text="card.value"></div>
+                                <div class="bottom-right" v-text="card.value"></div>
+                            </div>
+                            <div class="back">back</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -58,14 +78,30 @@
 
         <div class="hand">
             <div class="slot" v-for="(card, index) in game.hand.cards">
-                <div class="card" @mousedown="toggleCard($event.target, index)" :key="index" v-bind:style="{ transform: 'rotate(' + card.rotation + 'deg)' }">
-                    <div class="top-left" v-text="card.value"></div>
-                    <div class="center" v-text="card.value"></div>
-                    <div class="bottom-right" v-text="card.value"></div>
+                <transition name="card-switch">
+                <div class="card" @mousedown="toggleCard($event.target, index)" :key="card.value" v-bind:style="{ transform: 'rotate(' + card.rotation + 'deg)' }">
+                    <div class="flipper">
+                        <div class="front">
+                            <div class="top-left" v-text="card.value"></div>
+                            <div class="center" v-text="card.value"></div>
+                            <div class="bottom-right" v-text="card.value"></div>
+                        </div>
+                        <div class="back">back</div>
+                    </div>
                 </div>
+                </transition>
             </div>
-            <div class="slot">
-                <div class="card" v-for="card in game.stack.cards"></div>
+            <div class="slot stack">
+                <div class="card" v-for="card in game.stack.cards">
+                    <div class="flipper">
+                        <div class="front">
+                            <div class="top-left" v-text="card.value"></div>
+                            <div class="center" v-text="card.value"></div>
+                            <div class="bottom-right" v-text="card.value"></div>
+                        </div>
+                        <div class="back">back</div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

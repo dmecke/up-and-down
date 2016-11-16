@@ -110,11 +110,11 @@
 	    };
 	    Game.prototype.dropCard = function (handIndex, slot, card) {
 	        this.slot(slot).drop(card);
-	        this.hand.cards.splice(handIndex, 1);
+	        // this.hand.cards.splice(handIndex, 1);
 	        this.slot(slot).lastCard().rerotate();
-	        var newCards = this.stack.draw(1);
-	        newCards[0].rerotate();
-	        this.hand.take(newCards);
+	        var newCard = this.stack.drawOne();
+	        newCard.rerotate();
+	        this.hand.takeOne(newCard, handIndex);
 	    };
 	    Game.prototype.isGameOver = function () {
 	        if (this.slotOneUp.canBeServedBy(this.hand)) {
@@ -163,6 +163,9 @@
 	        while (card = cards.pop()) {
 	            this.cards.push(card);
 	        }
+	    };
+	    Hand.prototype.takeOne = function (card, index) {
+	        this.cards[index] = card;
 	    };
 	    Hand.prototype.numberOfCards = function () {
 	        return this.cards.length;
@@ -286,6 +289,9 @@
 	            cards.push(this.cards.pop());
 	        }
 	        return cards;
+	    };
+	    Stack.prototype.drawOne = function () {
+	        return this.draw(1)[0];
 	    };
 	    Stack.prototype.numberOfCards = function () {
 	        return this.cards.length;
