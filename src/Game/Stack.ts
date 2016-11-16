@@ -6,7 +6,7 @@ class Stack
 
     constructor()
     {
-        for (let i = 2; i <= 99; i++) {
+        for (let i = 1; i <= 100; i++) {
             this.cards.push(new Card(i));
         }
 
