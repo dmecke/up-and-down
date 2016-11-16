@@ -14,8 +14,11 @@
     font-weight: bold;
     src: url(font/Kalam-Bold.ttf) format('truetype');
 }
+html, body, #game {
+    height: 100%;
+}
 body {
-    background: url(img/background.jpg);
+    background: url(img/background.jpg) #000;
     font-family: Kalam, Georgia, Times New Roman, serif;
     font-size: 2.5vw;
     color: #eee;
@@ -25,6 +28,19 @@ hr {
     border: 0;
     border-top: 0.2vw solid rgba(0, 0, 0, 0.5);
     border-bottom: 0.2vw solid rgba(255, 255, 255, 0.3);
+}
+[v-cloak] {
+    display: none;
+}
+.loading {
+    display: none;
+    font-size: 15vw;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+[v-cloak].loading {
+    display: flex;
 }
 .score {
     text-align: center;
