@@ -92,9 +92,9 @@
 
 	"use strict";
 	var Hand_1 = __webpack_require__(2);
-	var SlotUp_1 = __webpack_require__(3);
-	var SlotDown_1 = __webpack_require__(5);
-	var Stack_1 = __webpack_require__(6);
+	var SlotUp_1 = __webpack_require__(4);
+	var SlotDown_1 = __webpack_require__(6);
+	var Stack_1 = __webpack_require__(7);
 	var Game = (function () {
 	    function Game() {
 	        this.stack = new Stack_1["default"]();
@@ -112,8 +112,13 @@
 	        this.slot(slot).drop(card);
 	        this.slot(slot).lastCard().rerotate();
 	        var newCard = this.stack.drawOne();
-	        newCard.rerotate();
-	        this.hand.takeOne(newCard, handIndex);
+	        if (newCard) {
+	            newCard.rerotate();
+	            this.hand.takeOne(newCard, handIndex);
+	        }
+	        else {
+	            this.hand.clear(handIndex);
+	        }
 	    };
 	    Game.prototype.isGameOver = function () {
 	        if (this.slotOneUp.canBeServedBy(this.hand)) {
@@ -129,6 +134,9 @@
 	            return false;
 	        }
 	        return true;
+	    };
+	    Game.prototype.isWon = function () {
+	        return this.hand.numberOfCards() == 0;
 	    };
 	    Game.prototype.slot = function (index) {
 	        switch (index) {
@@ -150,9 +158,10 @@
 
 /***/ },
 /* 2 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
+	var Card_1 = __webpack_require__(3);
 	var Hand = (function () {
 	    function Hand() {
 	        this.cards = [];
@@ -166,8 +175,17 @@
 	    Hand.prototype.takeOne = function (card, index) {
 	        this.cards[index] = card;
 	    };
+	    Hand.prototype.clear = function (index) {
+	        this.cards[index] = new Card_1["default"](0);
+	    };
 	    Hand.prototype.numberOfCards = function () {
-	        return this.cards.length;
+	        var numberOfCards = 0;
+	        for (var i = 0; i < this.cards.length; i++) {
+	            if (!this.cards[i].isFake()) {
+	                numberOfCards++;
+	            }
+	        }
+	        return numberOfCards;
 	    };
 	    return Hand;
 	}());
@@ -177,6 +195,28 @@
 
 /***/ },
 /* 3 */
+/***/ function(module, exports) {
+
+	"use strict";
+	var Card = (function () {
+	    function Card(value) {
+	        this.value = value;
+	        this.rerotate();
+	    }
+	    Card.prototype.rerotate = function () {
+	        this.rotation = Math.random() * 6 - 3;
+	    };
+	    Card.prototype.isFake = function () {
+	        return this.value == 0;
+	    };
+	    return Card;
+	}());
+	exports.__esModule = true;
+	exports["default"] = Card;
+
+
+/***/ },
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -185,13 +225,16 @@
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var Slot_1 = __webpack_require__(4);
+	var Slot_1 = __webpack_require__(5);
 	var SlotUp = (function (_super) {
 	    __extends(SlotUp, _super);
 	    function SlotUp() {
 	        _super.apply(this, arguments);
 	    }
 	    SlotUp.prototype.isValid = function (card) {
+	        if (card.isFake()) {
+	            return false;
+	        }
 	        if (this.cards.length == 0) {
 	            return true;
 	        }
@@ -208,7 +251,7 @@
 
 
 /***/ },
-/* 4 */
+/* 5 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -220,7 +263,7 @@
 	        this.cards.push(card);
 	    };
 	    Slot.prototype.canBeServedBy = function (hand) {
-	        for (var i = 1; i <= hand.numberOfCards(); i++) {
+	        for (var i = 1; i <= hand.cards.length; i++) {
 	            if (this.isValid(hand.cards[i - 1])) {
 	                return true;
 	            }
@@ -237,7 +280,7 @@
 
 
 /***/ },
-/* 5 */
+/* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -246,13 +289,16 @@
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var Slot_1 = __webpack_require__(4);
+	var Slot_1 = __webpack_require__(5);
 	var SlotDown = (function (_super) {
 	    __extends(SlotDown, _super);
 	    function SlotDown() {
 	        _super.apply(this, arguments);
 	    }
 	    SlotDown.prototype.isValid = function (card) {
+	        if (card.isFake()) {
+	            return false;
+	        }
 	        if (this.cards.length == 0) {
 	            return true;
 	        }
@@ -269,15 +315,15 @@
 
 
 /***/ },
-/* 6 */
+/* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var Card_1 = __webpack_require__(7);
+	var Card_1 = __webpack_require__(3);
 	var Stack = (function () {
 	    function Stack() {
 	        this.cards = [];
-	        for (var i = 1; i <= 100; i++) {
+	        for (var i = 1; i <= 10; i++) {
 	            this.cards.push(new Card_1["default"](i));
 	        }
 	        this.shuffleCards();
@@ -293,7 +339,13 @@
 	        return this.draw(1)[0];
 	    };
 	    Stack.prototype.numberOfCards = function () {
-	        return this.cards.length;
+	        var numberOfCards = 0;
+	        for (var i = 0; i < this.cards.length; i++) {
+	            if (!this.cards[i].isFake()) {
+	                numberOfCards++;
+	            }
+	        }
+	        return numberOfCards;
 	    };
 	    Stack.prototype.shuffleCards = function () {
 	        for (var i = this.cards.length - 1; i > 0; i--) {
@@ -307,25 +359,6 @@
 	}());
 	exports.__esModule = true;
 	exports["default"] = Stack;
-
-
-/***/ },
-/* 7 */
-/***/ function(module, exports) {
-
-	"use strict";
-	var Card = (function () {
-	    function Card(value) {
-	        this.value = value;
-	        this.rerotate();
-	    }
-	    Card.prototype.rerotate = function () {
-	        this.rotation = Math.random() * 6 - 3;
-	    };
-	    return Card;
-	}());
-	exports.__esModule = true;
-	exports["default"] = Card;
 
 
 /***/ },

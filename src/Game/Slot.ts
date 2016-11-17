@@ -12,7 +12,7 @@ abstract class Slot
 
     public canBeServedBy(hand: Hand): boolean
     {
-        for (let i = 1; i <= hand.numberOfCards(); i++) {
+        for (let i = 1; i <= hand.cards.length; i++) {
             if (this.isValid(hand.cards[i - 1])) {
                 return true;
             }

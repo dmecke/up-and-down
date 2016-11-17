@@ -6,7 +6,7 @@ class Stack
 
     constructor()
     {
-        for (let i = 1; i <= 100; i++) {
+        for (let i = 1; i <= 10; i++) {
             this.cards.push(new Card(i));
         }
 
@@ -30,7 +30,14 @@ class Stack
 
     public numberOfCards(): number
     {
-        return this.cards.length;
+        var numberOfCards = 0;
+        for (var i = 0; i < this.cards.length; i++) {
+            if (!this.cards[i].isFake()) {
+                numberOfCards++;
+            }
+        }
+
+        return numberOfCards;
     }
 
     private shuffleCards(): void

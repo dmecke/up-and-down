@@ -17,9 +17,21 @@ class Hand
         this.cards[index] = card;
     }
 
+    public clear(index: number)
+    {
+        this.cards[index] = new Card(0);
+    }
+
     public numberOfCards(): number
     {
-        return this.cards.length;
+        var numberOfCards = 0;
+        for (var i = 0; i < this.cards.length; i++) {
+            if (!this.cards[i].isFake()) {
+                numberOfCards++;
+            }
+        }
+
+        return numberOfCards;
     }
 }
 

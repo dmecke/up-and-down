@@ -11,7 +11,10 @@
 <body>
     <div id="game">
         <div v-cloak class="loading"><div>loading...</div></div>
-        <div class="game-over" v-show="game.isGameOver()"><div>Game Over</div></div>
+        <div class="game-over" v-show="game.isGameOver()">
+            <div v-if="game.isWon()">You Won!</div>
+            <div v-else>Game Over</div>
+        </div>
         <div v-cloak class="game-container">
             <h2 class="score" v-text="game.score()+' cards left'"></h2>
             <div class="slots">
@@ -81,17 +84,17 @@
 
             <div class="hand">
                 <div class="slot" v-for="(card, index) in game.hand.cards">
-                    <transition name="card-switch">
-                    <div class="card" @mousedown="toggleCard($event.target, index)" :key="card.value" v-bind:style="{ transform: 'rotate(' + card.rotation + 'deg)' }">
-                        <div class="flipper">
-                            <div class="front">
-                                <div class="top-left" v-text="card.value"></div>
-                                <div class="center" v-text="card.value"></div>
-                                <div class="bottom-right" v-text="card.value"></div>
+                    <transition name="card-switch" appear>
+                        <div class="card" @mousedown="toggleCard($event.target, index)" :key="card.value" v-bind:style="{ transform: 'rotate(' + card.rotation + 'deg)' }" v-show="!card.isFake()">
+                            <div class="flipper">
+                                <div class="front">
+                                    <div class="top-left" v-text="card.value"></div>
+                                    <div class="center" v-text="card.value"></div>
+                                    <div class="bottom-right" v-text="card.value"></div>
+                                </div>
+                                <div class="back"></div>
                             </div>
-                            <div class="back"></div>
                         </div>
-                    </div>
                     </transition>
                 </div>
                 <div class="slot stack">

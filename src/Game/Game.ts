@@ -29,8 +29,12 @@ class Game
         this.slot(slot).drop(card);
         this.slot(slot).lastCard().rerotate();
         var newCard = this.stack.drawOne();
-        newCard.rerotate();
-        this.hand.takeOne(newCard, handIndex);
+        if (newCard) {
+            newCard.rerotate();
+            this.hand.takeOne(newCard, handIndex);
+        } else {
+            this.hand.clear(handIndex);
+        }
     }
 
     public isGameOver(): boolean
@@ -52,6 +56,11 @@ class Game
         }
 
         return true;
+    }
+
+    public isWon(): boolean
+    {
+        return this.hand.numberOfCards() == 0;
     }
 
     public slot(index: number): Slot

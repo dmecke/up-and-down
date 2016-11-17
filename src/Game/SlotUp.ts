@@ -5,6 +5,10 @@ class SlotUp extends Slot
 {
     public isValid(card: Card): boolean
     {
+        if (card.isFake()) {
+            return false;
+        }
+
         if (this.cards.length == 0) {
             return true;
         }
