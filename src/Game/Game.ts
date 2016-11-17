@@ -1,5 +1,6 @@
 import Card from "./Card";
 import Hand from "./Hand";
+import Highscore from "./Highscore";
 import Slot from "./Slot";
 import SlotUp from "./SlotUp";
 import SlotDown from "./SlotDown";
@@ -17,6 +18,7 @@ class Game
     constructor()
     {
         this.hand.take(this.stack.draw(7));
+        console.log(Highscore.create());
     }
 
     public score(): number
@@ -34,6 +36,10 @@ class Game
             this.hand.takeOne(newCard, handIndex);
         } else {
             this.hand.clear(handIndex);
+        }
+
+        if (this.isGameOver()) {
+            this.saveHighscore();
         }
     }
 
@@ -78,6 +84,13 @@ class Game
             case 3:
                 return this.slotTwoDown;
         }
+    }
+
+    private saveHighscore(): void
+    {
+        var highscore = Highscore.create();
+        highscore.add(this.score());
+        highscore.save();
     }
 }
 
