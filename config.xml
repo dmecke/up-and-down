@@ -12,18 +12,6 @@
     <preference name="permissions" value="none" />
     <preference name="orientation" value="portrait" />
     <platform name="android">
-        <splash src="splash-port-ldpi.png" qualifier="port-ldpi"/> <!-- 200x320 -->
-        <splash src="splash-port-mdpi.png" qualifier="port-mdpi"/> <!-- 320x480 -->
-        <splash src="splash-port-hdpi.png" qualifier="port-hdpi"/> <!-- 480x800 -->
-        <splash src="splash-port-xhdpi.png" qualifier="port-xhdpi"/> <!-- 720x1280 -->
-        <splash src="splash-port-xxhdpi.png" qualifier="port-xxhdpi"/> <!-- 960x1600 -->
-        <splash src="splash-port-xxxhdpi.png" qualifier="port-xxxhdpi"/> <!-- 1280x1920 -->
-
-        <splash src="splash-land-ldpi.png" qualifier="land-ldpi"/> <!-- 320x200 -->
-        <splash src="splash-land-mdpi.png" qualifier="land-mdpi"/> <!-- 480x320 -->
-        <splash src="splash-land-hdpi.png" qualifier="land-hdpi"/> <!-- 800x480 -->
-        <splash src="splash-land-xhdpi.png" qualifier="land-xhdpi"/> <!-- 1280x720 -->
-        <splash src="splash-land-xxhdpi.png" qualifier="land-xxhdpi"/> <!-- 1600x960 -->
-        <splash src="splash-land-xxxhdpi.png" qualifier="land-xxxhdpi"/> <!-- 1920x1280 -->
+        <icon src="icon.png"/>
     </platform>
 </widget>
