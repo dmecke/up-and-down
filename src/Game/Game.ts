@@ -8,17 +8,27 @@ import Stack from "./Stack";
 
 class Game
 {
-    private stack: Stack = new Stack();
-    private hand: Hand = new Hand();
-    private slotOneUp: SlotUp = new SlotUp();
-    private slotTwoUp: SlotUp = new SlotUp();
-    private slotOneDown: SlotDown = new SlotDown();
-    private slotTwoDown: SlotDown = new SlotDown();
+    private stack: Stack;
+    private hand: Hand;
+    private slotOneUp: SlotUp;
+    private slotTwoUp: SlotUp;
+    private slotOneDown: SlotDown;
+    private slotTwoDown: SlotDown;
     
     constructor()
     {
+        this.restart();
+    }
+
+    public restart()
+    {
+        this.stack = new Stack();
+        this.hand = new Hand();
+        this.slotOneUp = new SlotUp();
+        this.slotTwoUp = new SlotUp();
+        this.slotOneDown = new SlotDown();
+        this.slotTwoDown = new SlotDown();
         this.hand.take(this.stack.draw(7));
-        console.log(Highscore.create());
     }
 
     public score(): number

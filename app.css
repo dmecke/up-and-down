@@ -53,6 +53,12 @@ hr {
     background: rgba(0, 0, 0, 0.9);
     z-index: 10;
 }
+.game-over .actions {
+    text-align: center;
+}
+.game-over .actions img {
+    width: 16vw;
+}
 .score {
     text-align: center;
     font-size: 10vw;

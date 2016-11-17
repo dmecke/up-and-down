@@ -12,8 +12,13 @@
     <div id="game">
         <div v-cloak class="loading"><div>loading...</div></div>
         <div class="game-over" v-show="game.isGameOver()">
-            <div v-if="game.isWon()">You Won!</div>
-            <div v-else>Game Over</div>
+            <div>
+                <div v-if="game.isWon()">You Won!</div>
+                <div v-else>Game Over</div>
+                <div class="actions">
+                    <img src="img/restart.png" alt="restart" @click="game.restart()" />
+                </div>
+            </div>
         </div>
         <div v-cloak class="game-container">
             <h2 class="score" v-text="game.score()+' cards left'"></h2>

@@ -98,6 +98,9 @@
 	var Stack_1 = __webpack_require__(9);
 	var Game = (function () {
 	    function Game() {
+	        this.restart();
+	    }
+	    Game.prototype.restart = function () {
 	        this.stack = new Stack_1["default"]();
 	        this.hand = new Hand_1["default"]();
 	        this.slotOneUp = new SlotUp_1["default"]();
@@ -105,8 +108,7 @@
 	        this.slotOneDown = new SlotDown_1["default"]();
 	        this.slotTwoDown = new SlotDown_1["default"]();
 	        this.hand.take(this.stack.draw(7));
-	        console.log(Highscore_1["default"].create());
-	    }
+	    };
 	    Game.prototype.score = function () {
 	        return this.stack.numberOfCards() + this.hand.numberOfCards();
 	    };
