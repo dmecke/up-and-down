@@ -110,7 +110,6 @@
 	    };
 	    Game.prototype.dropCard = function (handIndex, slot, card) {
 	        this.slot(slot).drop(card);
-	        // this.hand.cards.splice(handIndex, 1);
 	        this.slot(slot).lastCard().rerotate();
 	        var newCard = this.stack.drawOne();
 	        newCard.rerotate();

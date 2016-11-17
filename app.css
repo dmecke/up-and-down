@@ -33,15 +33,25 @@ hr {
 [v-cloak] {
     display: none;
 }
-.loading {
-    display: none;
+.loading,
+.game-over {
     font-size: 15vw;
     justify-content: center;
     align-items: center;
     height: 100%;
 }
+.loading {
+    display: none;
+}
 [v-cloak].loading {
     display: flex;
+}
+.game-over {
+    display: flex;
+    position: absolute;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 10;
 }
 .score {
     text-align: center;

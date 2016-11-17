@@ -27,7 +27,6 @@ class Game
     public dropCard(handIndex: number, slot: number, card: Card): void
     {
         this.slot(slot).drop(card);
-        // this.hand.cards.splice(handIndex, 1);
         this.slot(slot).lastCard().rerotate();
         var newCard = this.stack.drawOne();
         newCard.rerotate();
