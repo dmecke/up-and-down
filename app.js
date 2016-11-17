@@ -323,7 +323,7 @@
 	var Stack = (function () {
 	    function Stack() {
 	        this.cards = [];
-	        for (var i = 1; i <= 10; i++) {
+	        for (var i = 1; i <= 100; i++) {
 	            this.cards.push(new Card_1["default"](i));
 	        }
 	        this.shuffleCards();
