@@ -96,19 +96,21 @@ hr {
 .container.highscore ul {
     list-style-type: none;
     text-align: center;
-    font-size: 8vw;
-    margin: 16vw;
     padding: 0;
+}
+.container.menu ul {
+    margin: 16vw;
+    font-size: 10vw;
+}
+.container.highscore ul {
+    margin: 5vw;
+    font-size: 5vw;
 }
 .container.menu ul li {
     margin: 2vw;
 }
 .container.highscore ul li {
     margin: 0;
-}
-.container.highscore ul {
-    margin: 8vw;
-    font-size: 5vw;
 }
 .container.highscore .score {
     display: inline-block;
