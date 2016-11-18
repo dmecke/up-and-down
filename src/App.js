@@ -11,7 +11,8 @@ new Vue({
     el: '#game',
     data: {
         game: game,
-        movingCardIndex: null
+        movingCardIndex: null,
+        visibleContainer: 'menu'
     },
     methods: {
         toggleCard: function(card, index) {
@@ -30,6 +31,15 @@ new Vue({
                 $('.card').removeClass('moving');
                 this.movingCardIndex = null;
             }
+        },
+        showMenu: function() {
+            this.visibleContainer = 'menu';
+        },
+        showHighscore: function() {
+            this.visibleContainer = 'highscore';
+        },
+        showGame: function() {
+            this.visibleContainer = 'game';
         }
     }
 });

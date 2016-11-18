@@ -36,6 +36,11 @@ class Game
         return this.stack.numberOfCards() + this.hand.numberOfCards();
     }
 
+    public isRunning(): boolean
+    {
+        return this.score() != 100;
+    }
+
     public dropCard(handIndex: number, slot: number, card: Card): void
     {
         this.slot(slot).drop(card);
@@ -94,6 +99,11 @@ class Game
             case 3:
                 return this.slotTwoDown;
         }
+    }
+
+    public highscore(): Highscore
+    {
+        return Highscore.create();
     }
 
     private saveHighscore(): void

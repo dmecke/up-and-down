@@ -11,7 +11,7 @@
 <body>
     <div id="game">
         <div v-cloak class="loading"><div>loading...</div></div>
-        <div class="game-over" v-show="game.isGameOver()">
+        <div v-cloak class="game-over" v-show="game.isGameOver()">
             <div>
                 <div v-if="game.isWon()">You Won!</div>
                 <div v-else>Game Over</div>
@@ -20,8 +20,32 @@
                 </div>
             </div>
         </div>
-        <div v-cloak class="game-container">
-            <h2 class="score" v-text="game.score()+' cards left'"></h2>
+        <div v-cloak class="container menu" v-show="visibleContainer == 'menu'">
+            <div>
+                <h1>Up & Down</h1>
+                <ul>
+                    <li @click="game.restart(); showGame()">Neues Spiel</li>
+                    <li v-show="game.isRunning()" @click="showGame()">Spiel fortsetzen</li>
+                    <li @click="showHighscore()">Highscore</li>
+                </ul>
+            </div>
+        </div>
+        <div v-cloak class="container highscore" v-show="visibleContainer == 'highscore'">
+            <div>
+                <h2>Highscore</h2>
+                <ul>
+                    <li v-for="rank in game.highscore().all()">
+                        <span class="score" v-text="rank.score"></span> <span class="date" v-text="'- ' + rank.date"></span>
+                    </li>
+                </ul>
+                <div class="actions">
+                    <img src="img/back.png" alt="back" @click="showMenu()" />
+                </div>
+            </div>
+        </div>
+        <div v-cloak class="container game" v-show="visibleContainer == 'game'">
+            <div class="menu-button" @click="showMenu()"><img src="img/menu.png" alt="menu" /></div>
+            <h2 class="game-score" v-text="game.score()+' cards left'"></h2>
             <div class="slots">
                 <div class="slot-container">
                     <div class="direction"><img src="img/up.png" alt="UP" /></div>

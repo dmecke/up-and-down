@@ -52,10 +52,10 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var $ = __webpack_require__(10);
-	__webpack_require__(11);
+	var $ = __webpack_require__(9);
+	__webpack_require__(10);
 	
-	var Vue = __webpack_require__(12);
+	var Vue = __webpack_require__(11);
 	
 	var game = new _Game2.default();
 	
@@ -63,7 +63,8 @@
 	    el: '#game',
 	    data: {
 	        game: game,
-	        movingCardIndex: null
+	        movingCardIndex: null,
+	        visibleContainer: 'menu'
 	    },
 	    methods: {
 	        toggleCard: function toggleCard(card, index) {
@@ -82,6 +83,15 @@
 	                $('.card').removeClass('moving');
 	                this.movingCardIndex = null;
 	            }
+	        },
+	        showMenu: function showMenu() {
+	            this.visibleContainer = 'menu';
+	        },
+	        showHighscore: function showHighscore() {
+	            this.visibleContainer = 'highscore';
+	        },
+	        showGame: function showGame() {
+	            this.visibleContainer = 'game';
 	        }
 	    }
 	});
@@ -93,9 +103,9 @@
 	"use strict";
 	var Hand_1 = __webpack_require__(2);
 	var Highscore_1 = __webpack_require__(4);
-	var SlotUp_1 = __webpack_require__(6);
-	var SlotDown_1 = __webpack_require__(8);
-	var Stack_1 = __webpack_require__(9);
+	var SlotUp_1 = __webpack_require__(5);
+	var SlotDown_1 = __webpack_require__(7);
+	var Stack_1 = __webpack_require__(8);
 	var Game = (function () {
 	    function Game() {
 	        this.restart();
@@ -111,6 +121,9 @@
 	    };
 	    Game.prototype.score = function () {
 	        return this.stack.numberOfCards() + this.hand.numberOfCards();
+	    };
+	    Game.prototype.isRunning = function () {
+	        return this.score() != 100;
 	    };
 	    Game.prototype.dropCard = function (handIndex, slot, card) {
 	        this.slot(slot).drop(card);
@@ -156,6 +169,9 @@
 	            case 3:
 	                return this.slotTwoDown;
 	        }
+	    };
+	    Game.prototype.highscore = function () {
+	        return Highscore_1["default"].create();
 	    };
 	    Game.prototype.saveHighscore = function () {
 	        var highscore = Highscore_1["default"].create();
@@ -229,10 +245,9 @@
 
 /***/ },
 /* 4 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	"use strict";
-	var HighscoreRank_1 = __webpack_require__(5);
 	var Highscore = (function () {
 	    function Highscore(ranks) {
 	        this.ranks = ranks;
@@ -245,16 +260,16 @@
 	    };
 	    Highscore.createFresh = function () {
 	        var ranks = [
-	            new HighscoreRank_1["default"](100),
-	            new HighscoreRank_1["default"](100),
-	            new HighscoreRank_1["default"](100),
-	            new HighscoreRank_1["default"](100),
-	            new HighscoreRank_1["default"](100),
-	            new HighscoreRank_1["default"](100),
-	            new HighscoreRank_1["default"](100),
-	            new HighscoreRank_1["default"](100),
-	            new HighscoreRank_1["default"](100),
-	            new HighscoreRank_1["default"](100)
+	            this.getRank(100),
+	            this.getRank(100),
+	            this.getRank(100),
+	            this.getRank(100),
+	            this.getRank(100),
+	            this.getRank(100),
+	            this.getRank(100),
+	            this.getRank(100),
+	            this.getRank(100),
+	            this.getRank(100)
 	        ];
 	        return new Highscore(ranks);
 	    };
@@ -278,25 +293,28 @@
 	        if (index >= 10) {
 	            return;
 	        }
-	        this.ranks.splice(index, 0, new HighscoreRank_1["default"](score));
+	        this.ranks.splice(index, 0, Highscore.getRank(score));
 	        this.ranks.pop();
 	    };
 	    Highscore.prototype.getInsertIndex = function (score) {
-	        console.log(this.ranks);
 	        var index = 10;
 	        while (index > 0 && score < this.ranks[index - 1].score) {
-	            console.log(index - 1);
 	            index--;
 	        }
 	        return index;
 	    };
-	    Highscore.prototype.get = function (rank) {
-	        return this.ranks[rank];
+	    Highscore.prototype.all = function () {
+	        return this.ranks;
 	    };
 	    Highscore.prototype.save = function () {
 	        for (var i = 0; i < 10; i++) {
 	            localStorage.setItem('rank' + (i + 1), JSON.stringify(this.ranks[i]));
 	        }
+	    };
+	    Highscore.getRank = function (score) {
+	        var date = new Date();
+	        var dateString = date.getDate() + '.' + (date.getMonth() + 1) + '.' + date.getFullYear();
+	        return { score: score, date: dateString };
 	    };
 	    return Highscore;
 	}());
@@ -306,22 +324,6 @@
 
 /***/ },
 /* 5 */
-/***/ function(module, exports) {
-
-	"use strict";
-	var HighscoreRank = (function () {
-	    function HighscoreRank(score) {
-	        this.score = score;
-	        this.date = new Date();
-	    }
-	    return HighscoreRank;
-	}());
-	exports.__esModule = true;
-	exports["default"] = HighscoreRank;
-
-
-/***/ },
-/* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -330,7 +332,7 @@
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var Slot_1 = __webpack_require__(7);
+	var Slot_1 = __webpack_require__(6);
 	var SlotUp = (function (_super) {
 	    __extends(SlotUp, _super);
 	    function SlotUp() {
@@ -356,7 +358,7 @@
 
 
 /***/ },
-/* 7 */
+/* 6 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -385,7 +387,7 @@
 
 
 /***/ },
-/* 8 */
+/* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -394,7 +396,7 @@
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var Slot_1 = __webpack_require__(7);
+	var Slot_1 = __webpack_require__(6);
 	var SlotDown = (function (_super) {
 	    __extends(SlotDown, _super);
 	    function SlotDown() {
@@ -420,7 +422,7 @@
 
 
 /***/ },
-/* 9 */
+/* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -467,7 +469,7 @@
 
 
 /***/ },
-/* 10 */
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -10693,7 +10695,7 @@
 
 
 /***/ },
-/* 11 */
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! jQuery UI - v1.11.1 - 2014-08-13
@@ -10705,7 +10707,7 @@
 		if ( true ) {
 	
 			// AMD. Register as an anonymous module.
-			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [ __webpack_require__(10) ], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [ __webpack_require__(9) ], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 		} else {
 	
 			// Browser globals
@@ -27073,7 +27075,7 @@
 	}));
 
 /***/ },
-/* 12 */
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*!

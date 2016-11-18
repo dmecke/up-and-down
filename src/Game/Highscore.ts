@@ -1,10 +1,8 @@
-import HighscoreRank from "./HighscoreRank";
-
 class Highscore
 {
-    private ranks: Array<HighscoreRank>;
+    private ranks;
 
-    constructor(ranks: Array<HighscoreRank>)
+    constructor(ranks)
     {
         this.ranks = ranks;
     }
@@ -21,16 +19,16 @@ class Highscore
     private static createFresh(): Highscore
     {
         var ranks = [
-            new HighscoreRank(100),
-            new HighscoreRank(100),
-            new HighscoreRank(100),
-            new HighscoreRank(100),
-            new HighscoreRank(100),
-            new HighscoreRank(100),
-            new HighscoreRank(100),
-            new HighscoreRank(100),
-            new HighscoreRank(100),
-            new HighscoreRank(100)
+            this.getRank(100),
+            this.getRank(100),
+            this.getRank(100),
+            this.getRank(100),
+            this.getRank(100),
+            this.getRank(100),
+            this.getRank(100),
+            this.getRank(100),
+            this.getRank(100),
+            this.getRank(100)
         ];
 
         return new Highscore(ranks);
@@ -61,25 +59,23 @@ class Highscore
             return;
         }
 
-        this.ranks.splice(index, 0, new HighscoreRank(score));
+        this.ranks.splice(index, 0, Highscore.getRank(score));
         this.ranks.pop();
     }
 
     private getInsertIndex(score: number): number
     {
-        console.log(this.ranks);
         let index = 10;
         while (index > 0 && score < this.ranks[index - 1].score) {
-            console.log(index - 1);
             index--;
         }
 
         return index;
     }
 
-    public get(rank: number): HighscoreRank
+    public all()
     {
-        return this.ranks[rank];
+        return this.ranks;
     }
 
     public save(): void
@@ -87,6 +83,14 @@ class Highscore
         for (let i = 0; i < 10; i++) {
             localStorage.setItem('rank' + (i + 1), JSON.stringify(this.ranks[i]));
         }
+    }
+
+    private static getRank(score): any
+    {
+        var date = new Date();
+        var dateString = date.getDate() + '.' + (date.getMonth() + 1) + '.' + date.getFullYear();
+
+        return { score: score, date: dateString };
     }
 }
 
